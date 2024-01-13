@@ -1,0 +1,166 @@
+body { 
+    background: url("https://i.redd.it/x4esim9lgly41.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  
+  
+  
+  .login-box {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 500px;
+    height: 450px;
+    background-color: #36393F;
+    border-radius: 10px;
+  }
+  
+  
+  .login-box h1{
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    color: #F6F9FC;
+    top: -1%;
+    left: 25%;
+    font-size: 30px;
+  
+  }
+  
+  .login-box small{
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    color: #696e74;
+    font-size: 18px;
+    top: 13%;
+    left: 18%;
+  }
+  
+  
+  .login-box input[type="text"] {
+    position: absolute;
+    font-size: 20px;
+    height: 35px;
+    width: 400px;
+    top: 35%;
+    left: 10%;
+    background-color: #313339;
+    color: white; 
+    border: 1px solid #222428;
+    border-radius: 3px;
+    
+  }
+  
+  .login-box input[type="password"] {
+    position: absolute;
+    font-size: 20px;
+    height: 35px;
+    width: 400px;
+    top: 55%;
+    left: 10%;
+    background-color: #313339;
+    color: white; 
+    border: 1px solid #222428;
+    border-radius: 3px;
+  }
+  
+  .login-box input:focus {
+    outline: none;
+    border: 2px solid #7187DD;
+  }
+  
+  .login-box input {
+    background: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+  }
+  
+  .login-box button {
+    position: absolute;
+    top: 70%;
+    left: 10%;
+    font-family: 'Poppins', sans-serif;
+    background-color: #7187DD;
+    height: 40px;
+    width: 400px;
+    font-size: 15px;
+    color: white;
+    outline: none;
+    padding: 0;
+    border: none;
+    border-radius: 2px;
+    
+  }
+  
+  
+  .login-box a {
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    font-size: 13px;
+    color: #7289DA;
+    text-decoration: none;
+    top: 82%;
+    left: 10%;
+    
+  }
+  
+  .login-box sr {
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    font-size: 13px;
+    color: #7289DA;
+    top: 87%;
+    left: 10%;
+    text-decoration: none;
+    
+  }
+  
+  .login-box reg1 {
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    color: #ACAEB2;
+    font-size: 13px;
+    top: 29%;
+    left: 10%;
+    
+  }
+  
+  .login-box reg2 {
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    color: #ACAEB2;
+    font-size: 13px;
+    top: 50%;
+    left: 10%;
+    
+  }
+  
+  
+  .tag h1 {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+  }
+  
+  .tag h1:hover {
+    font-family: 'Poppins', sans-serif;
+    color: red;
+  }
+  
+  .tag span {
+    color: #7187DD;
+  }
+  
+  .tag span:hover {
+    color: white;
+  }
+  
+  .tag a {
+    font-family: 'Poppins', sans-serif;
+    color: #7187DD;
+  }
