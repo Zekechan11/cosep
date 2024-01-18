@@ -1,5 +1,5 @@
 <?php
-require "formfunctions.php";
+require_once('../functions/formfunctions.php');
 
 $errors = array();
 

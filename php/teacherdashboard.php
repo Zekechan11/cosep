@@ -1,5 +1,5 @@
 <?php
-require "formfunctions.php";
+require_once ('../functions/formfunctions.php');
 usercheck_login();
 
 ?>
@@ -52,7 +52,7 @@ usercheck_login();
     <div class="main-content">
         <div class="maincontainer">
             <?php
-                require_once('userconnection.php'); 
+                require_once('../functions/dbconfig.php'); 
 
                 $departmentId = $_SESSION['USER']->department_id;
 
@@ -81,7 +81,7 @@ usercheck_login();
                     <div class="student-box">
                         <div class="studenttxt">First year subjects :</div>
                         <?php
-                        require_once("userconnection.php");
+                      require_once('../functions/dbconfig.php'); 
 
                         $departmentId = $_SESSION['USER']->department_id;
                         $teacherId = $_SESSION['USER']->teacher_id;
@@ -135,7 +135,7 @@ usercheck_login();
                     <div class="student-box">
                         <div class="studenttxt">Second year subjects :</div>
                         <?php
-                        require_once("userconnection.php");
+              require_once('../functions/dbconfig.php'); 
 
                         $departmentId = $_SESSION['USER']->department_id;
                         $teacherId = $_SESSION['USER']->teacher_id;
@@ -189,7 +189,7 @@ usercheck_login();
                     <div class="student-box">
                         <div class="studenttxt">Third year subjects :</div>
                         <?php
-                        require_once("userconnection.php");
+                   require_once('../functions/dbconfig.php'); 
 
                         $departmentId = $_SESSION['USER']->department_id;
                         $teacherId = $_SESSION['USER']->teacher_id;
@@ -243,7 +243,7 @@ usercheck_login();
                     <div class="student-box">
                         <div class="studenttxt">Fourth year subjects :</div>
                         <?php
-                        require_once("userconnection.php");
+                    require_once('../functions/dbconfig.php'); 
 
                         $departmentId = $_SESSION['USER']->department_id;
                         $teacherId = $_SESSION['USER']->teacher_id;

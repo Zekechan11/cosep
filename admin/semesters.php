@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                             <tr>
                                                 <td> <?= $row['semester'] ?></td>
                                                 <td>
-                                                    <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="updateStudentButton" onclick="openUpdateModal(<?= $row['semester_id'] ?>)"></i> |
+                                                    <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#update-semester" onclick="openUpdateSemesterModal(<?= $row['semester_id'] ?>)"></i> |
                                                     <a href="../functions/deleteSemester.php?semesterId=<?= $row['semester_id'] ?>" onclick="return confirm('Are you sure you want to delete this student?');"> <i class="fa fa-trash _delete_cat" type="button" style="color:red"></i></a>
                                                 </td>
                                             </tr>
@@ -79,39 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     </div>
                 </div>
             </section>
+        </div>
+    </div>
 
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <h2 id="modalTitle">Create Semester</h2>
-                    <form method="POST" enctype="multipart/form-data" id="semesterForm" class="createModal">
-                        <div class="namedepartment">
-                            <div class="name">
-                                <label for="semesterName">Semester :</label>
-                                <input type="text" name="semesterName" id="semesterName" placeholder="Enter semester" required>
-                            </div>
-                        </div>
-                        <button class="submitbtn" name="createSemester" onclick="submitForm()">Create</button>
-                    </form>
-                </div>
-            </div>
-            <div id="updateModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeUpdateModal()">&times;</span>
-                    <h2 id="modalTitle">Update Semester</h2>
-                    <form method="POST" enctype="multipart/form-data" id="updateSemesterForm" class="createModal">
-                        <input type="hidden" name="semesterId" id="updateSemesterId">
-                        <div class="namedepartment">
-                            <div class="name">
-                                <label for="updateSemesterName">Semester :</label>
-                                <input type="text" name="updateSemesterName" id="updateSemesterName" placeholder="Enter semester" required>
-                            </div>
-                        </div>
-                        <button class="submitbtn" name="updateSemester" onclick="submitUpdateForm()">Update</button>
-                    </form>
-                </div>
-            </div>
-            <script src="../js/semesters.js"></script>
+    <?php require_once('../modal/create_semester.php'); ?>
+    <?php require_once('../modal/update_semester.php'); ?>
+    <script src="../js/semesters.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,23 @@
+<?php
+require_once ('../functions/formfunctions.php');
+usercheck_login();
+
+$errors = array();
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['createDepartment'])) {
+        $errors = createDepartment($_POST);
+    } elseif (isset($_POST['updateDepartment'])) {
+        $errors = updateDepartment($_POST);
+    }
+
+    if (count($errors) == 0) {
+        header("Location: index.php");
+        die;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

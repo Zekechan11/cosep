@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                             <td><?= $row['department_name'] ?></td>
 
                                             <td>
-                                                <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="updateStudentButton" onclick="openUpdateModal(<?= $row['teacher_id'] ?>)"></i> |
+                                                <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#update-teacher" onclick="openUpdateModal(<?= $row['teacher_id'] ?>)"></i> |
                                                 <a href="../functions/deleteTeacher.php?teacherId=<?= $row['teacher_id'] ?>" onclick="return confirm('Are you sure you want to delete this teacher?');"><i class="fa fa-trash _delete_cat" type="button" style="color:red"></i></a>
                                             </td>
                                         </tr>
@@ -87,8 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
         </section>
     </div>
-
-
         <?php
         require_once('../functions/dbconfig.php');
 
@@ -99,10 +97,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $stmt->execute();
         $departments = $stmt->fetchAll(PDO::FETCH_OBJ);
         ?>
-
+<?php require_once('../modal/update_teacher.php'); ?>
 </body>
 
 </html>
+<script src="../js/teachers.js"></script>
 <?php require_once('../modal/create_teacher.php'); ?>
-<?php require_once('../modal/update_teacher.php'); ?>
+
 <?php require_once('../inc/footer.php'); ?>

@@ -172,7 +172,8 @@ $teacherId = $_SESSION['USER']->teacher_id;
                 </div>
             </div>
             <?php
-                require_once('userconnection.php');
+        require_once('../functions/dbconfig.php'); 
+
 
                 $newconnection = new Connection();
                 $connection = $newconnection->openConnection();

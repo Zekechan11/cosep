@@ -52,7 +52,7 @@ function openCreateModal() {
             document.getElementById("updateModal").style.display = "block";
         }
     };
-    xhttp.open("GET", "../functions/getStudentData.php?studentId=" + studentId, true);
+    xhttp.open("GET", "getStudentData.php?studentId=" + studentId, true);
     xhttp.send();
 }
 

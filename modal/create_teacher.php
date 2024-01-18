@@ -30,7 +30,7 @@
                     <label for="teacherEmail">Email:</label>
                     <input type="text" name="teacherEmail" id="teacherEmail" placeholder="Enter email" required>
                     <label for="teacherPassword">Password:</label>
-                    <div class="eyebutton"><img src="../images/show.png" alt="" class="icon" id="eyeicon"></div>
+                    <i class="fa-regular fa-eye eyes" onclick="togglePassword('teacherPassword')"></i>
                     <input type="password" name="teacherPassword" id="teacherPassword" placeholder="Enter password" required>
                     <div class="container2">
                         <label for="profile" class="custom-file-input">Teacher Profile:</label>
@@ -48,3 +48,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    function togglePassword(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+</script>
+
+<style> 
+
+    .fa-regular.fa-eye {
+        position: absolute;
+        top: 49%;
+        right: 30px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: black;
+    }
+</style>

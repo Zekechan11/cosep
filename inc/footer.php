@@ -1,9 +1,5 @@
 <html>
 
-<head>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
-</head>
-
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/7b92f6b770.js" crossorigin="anonymous"></script>

@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content" style="background-color: rgba(0, 0, 0, 0);">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: white;">Add Department</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: white;">Add Student</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: red;"></button>
             </div>
             <div class="modal-body">
@@ -58,7 +58,7 @@
                     <label for="studentEmail">Email:</label>
                     <input type="text" name="studentEmail" id="studentEmail" placeholder="Enter email" required>
                     <label for="studentPassword">Password:</label>
-                    <div class="eyebutton"><img src="../images/show.png" alt="" class="icon" id="eyeicon"></div>
+                    <i class="fa-regular fa-eye eyes" onclick="togglePassword('studentPassword')"></i>
                     <input type="password" name="studentPassword" id="studentPassword" placeholder="Enter password" required>
                     <div class="modal-footer">
                     <button class="submitbtn px-4" name="createStudentAccount" onclick="submitForm()">Create</button>
@@ -67,3 +67,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    function togglePassword(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+</script>
+
+<style>
+    /* Style for the password container */
+    .password-container {
+        position: relative;
+    }
+
+    /* Style for the eye icon */
+    .fa-regular.fa-eye {
+        position: absolute;
+        top: 72%;
+        right: 30px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: black;
+    }
+    .submitbtn {
+        position: relative;
+        top: 20px;
+    }
+</style>

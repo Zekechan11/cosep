@@ -32,7 +32,7 @@ function openCreateModal() {
     
         }
     };
-    xhttp.open("GET", "../functions/getSemesterData.php?semesterId=" + semesterId, true);
+    xhttp.open("GET", "getSemesterData.php?semesterId=" + semesterId, true);
     xhttp.send();
 }
 

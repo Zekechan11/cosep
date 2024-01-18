@@ -1,5 +1,5 @@
 <?php
-require "formfunctions.php";
+require_once('../functions/formfunctions.php');
 usercheck_login();
 
 
@@ -49,7 +49,7 @@ usercheck_login();
     <div class="main-content">
         <div class="maincontainer">
             <?php
-                require_once('userconnection.php'); 
+                require_once('../functions/dbconfig.php'); 
 
                 $departmentId = $_SESSION['USER']->department_id;
 
@@ -78,7 +78,7 @@ usercheck_login();
                     <div class="studenttxt">Subjects :</div>
                     <div class="student-box">
                         <?php
-                            require_once("userconnection.php");
+                           require_once('../functions/dbconfig.php'); 
 
                             $departmentId = $_SESSION['USER']->department_id;
                             $yearlevelId = $_SESSION['USER']->yearlevel_id;

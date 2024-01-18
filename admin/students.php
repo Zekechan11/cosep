@@ -29,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <div class="studenttxt"></div>
             <section class="tables py-3">
-            <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
+                <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
                     <div class="card-header shadow-sm">
                         <button type="button" class="btn btn-warning" style="float: right;" data-bs-toggle="modal" data-bs-target="#create-student">
                             <i class="fa fa-plus"></i> Add Students</button>
-                            <h3 style="color:white;">First Year : </h3>
+                        <h3 style="color:white;">First Year : </h3>
                     </div>
                     <div class="card-body" style="color:white;">
                         <div class="table-body col-12 text-center">
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                                 <td><?= $row['year_level'] ?></td>
                                                 <td><?= $row['course_name'] ?></td>
                                                 <td>
-                                                    <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="openUpdateModal(<?= $row['student_id'] ?>)"></i> |
+                                                    <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#update-student" onclick="openUpdateModal(<?= $row['student_id'] ?>)"></i> |
                                                     <a href="../functions/deleteStudent.php?studentId=<?= $row['student_id'] ?>" onclick="return confirm('Are you sure you want to delete this student?');"> <i class="fa fa-trash _delete_cat" type="button" style="color:red"></i></a>
                                                 </td>
                                             </tr>
@@ -93,17 +93,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     </div>
                 </div>
             </section>
-
         </div>
         <div class="tab-pane fade" id="nav-second" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-
             <div class="studenttxt"></div>
             <section class="tables py-3">
-            <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
+                <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
                     <div class="card-header shadow-sm">
-                        <button type="button" class="btn btn-warning" style="float: right;" data-bs-toggle="modal" data-bs-target="#create-student">
-                            <i class="fa fa-plus"></i> Add Students</button>
-                            <h3 style="color:white;">Second Year : </h3>
+                        <h3 style="color:white;">Second Year : </h3>
                     </div>
                     <div class="card-body" style="color:white;">
                         <div class="table-body col-12 text-center">
@@ -144,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                                 <td><?= $row['year_level'] ?></td>
                                                 <td><?= $row['course_name'] ?></td>
                                                 <td>
-                                                <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="openUpdateModal(<?= $row['student_id'] ?>)"></i> |
+                                                    <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#update-student" onclick="openUpdateModal(<?= $row['student_id'] ?>)"></i> |
                                                     <a href="../functions/deleteStudent.php?studentId=<?= $row['student_id'] ?>" onclick="return confirm('Are you sure you want to delete this student?');"> <i class="fa fa-trash _delete_cat" type="button" style="color:red"></i></a>
                                                 </td>
                                             </tr>
@@ -168,11 +164,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <div class="studenttxt"></div>
             <section class="tables py-3">
-            <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
+                <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
                     <div class="card-header shadow-sm">
-                        <button type="button" class="btn btn-warning" style="float: right;" data-bs-toggle="modal" data-bs-target="#create-student">
-                            <i class="fa fa-plus"></i> Add Students</button>
-                            <h3 style="color:white;">Third Year : </h3>
+                        <h3 style="color:white;">Third Year : </h3>
                     </div>
                     <div class="card-body" style="color:white;">
                         <div class="table-body col-12 text-center">
@@ -192,19 +186,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                     require_once("../functions/dbconfig.php");
                                     $newconnection = new Connection();
                                     $connection = $newconnection->openConnection();
-                        
+
                                     $sql = "SELECT * FROM students WHERE year_level = '3rd Year' ORDER BY department_id";
                                     $result = $connection->query($sql);
-                        
+
                                     if ($result->rowCount() > 0) {
                                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        
+
                                             $department = $row['department_id'];
-                        
+
                                             $stmt = $connection->prepare("SELECT * FROM department WHERE department_id = $department");
                                             $stmt->execute();
                                             $departments = $stmt->fetch(PDO::FETCH_OBJ);
-                        
+
                                     ?>
                                             <tr>
                                                 <td><img src="<?= $departments->department_logo ?>" alt="" style="border-radius:50%;hieght:50px;width:50px;"></td>
@@ -213,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                                 <td><?= $row['year_level'] ?></td>
                                                 <td><?= $row['course_name'] ?></td>
                                                 <td>
-                                                <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="openUpdateModal(<?= $row['student_id'] ?>)"></i> |
+                                                    <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#update-student" onclick="openUpdateModal(<?= $row['student_id'] ?>)"></i> |
                                                     <a href="../functions/deleteStudent.php?studentId=<?= $row['student_id'] ?>" onclick="return confirm('Are you sure you want to delete this student?');"> <i class="fa fa-trash _delete_cat" type="button" style="color:red"></i></a>
                                                 </td>
                                             </tr>
@@ -237,11 +231,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <div class="studenttxt"></div>
             <section class="tables py-3">
-            <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
+                <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
                     <div class="card-header shadow-sm">
-                        <button type="button" class="btn btn-warning" style="float: right;" data-bs-toggle="modal" data-bs-target="#create-student">
-                            <i class="fa fa-plus"></i> Add Students</button>
-                            <h3 style="color:white;">Fourth Year : </h3>
+                        <h3 style="color:white;">Fourth Year : </h3>
                     </div>
                     <div class="card-body" style="color:white;">
                         <div class="table-body col-12 text-center">
@@ -258,23 +250,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 </thead>
                                 <tbody style="vertical-align: middle;">
                                     <?php
-                                     require_once("../functions/dbconfig.php");
-                                     $newconnection = new Connection();
-                                     $connection = $newconnection->openConnection();
-                         
-                                     $sql = "SELECT * FROM students WHERE year_level = '4th Year' ORDER BY department_id";
-                                     $result = $connection->query($sql);
-                         
-                                     if ($result->rowCount() > 0) {
-                                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                         
-                                             $department = $row['department_id'];
-                         
-                                             $stmt = $connection->prepare("SELECT * FROM department WHERE department_id = $department");
-                                             $stmt->execute();
-                                             $departments = $stmt->fetch(PDO::FETCH_OBJ);
-                         
-                                     ?>
+                                    require_once("../functions/dbconfig.php");
+                                    $newconnection = new Connection();
+                                    $connection = $newconnection->openConnection();
+
+                                    $sql = "SELECT * FROM students WHERE year_level = '4th Year' ORDER BY department_id";
+                                    $result = $connection->query($sql);
+
+                                    if ($result->rowCount() > 0) {
+                                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+
+                                            $department = $row['department_id'];
+
+                                            $stmt = $connection->prepare("SELECT * FROM department WHERE department_id = $department");
+                                            $stmt->execute();
+                                            $departments = $stmt->fetch(PDO::FETCH_OBJ);
+
+                                    ?>
                                             <tr>
                                                 <td><img src="<?= $departments->department_logo ?>" alt="" style="border-radius:50%;hieght:50px;width:50px;"></td>
                                                 <td><?= $row['student_name'] ?></td>
@@ -282,7 +274,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                                 <td><?= $row['year_level'] ?></td>
                                                 <td><?= $row['course_name'] ?></td>
                                                 <td>
-                                                <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="openUpdateModal(<?= $row['student_id'] ?>)"></i> |
+                                                    <i class="fa-solid fa-edit" type="button" style="color: green" data-bs-toggle="modal" data-bs-target="#update-student" onclick="openUpdateModal(<?= $row['student_id'] ?>)"></i> |
                                                     <a href="../functions/deleteStudent.php?studentId=<?= $row['student_id'] ?>" onclick="return confirm('Are you sure you want to delete this student?');"> <i class="fa fa-trash _delete_cat" type="button" style="color:red"></i></a>
                                                 </td>
                                             </tr>
@@ -322,8 +314,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         ?>
     </div>
 </div>
-
+<?php require_once('../modal/update_student.php'); ?>
 <script src="../js/students.js"></script>
+
 <script>
     document.getElementById("defaultOpen").click();
 
@@ -346,5 +339,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </script>
 
 <?php require_once('../modal/student_create.php'); ?>
-<?php require_once('../modal/update_student.php'); ?>
+
 <?php require_once('../inc/footer.php'); ?>
