@@ -1,8 +1,8 @@
 <?php
-require "../functions/formfunctions.php";
+require_once('../functions/formfunctions.php');
 usercheck_login();
 
-require_once('../functions/dbconfig.php'); 
+require_once('../functions/dbconfig.php');
 
 
 $errors = array();
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 if (isset($_GET['subject_id'])) {
     $subjectId = $_GET['subject_id'];
-    
+
     $newconnection = new Connection();
     $connection = $newconnection->openConnection();
     $stmt = $connection->prepare("SELECT * FROM subjects WHERE subject_id = :subject_id");
@@ -32,21 +32,39 @@ if (isset($_GET['subject_id'])) {
 $teacherId = $_SESSION['USER']->teacher_id;
 
 ?>
+
+<?php
+require_once('../functions/dbconfig.php');
+
+$departmentId = $_SESSION['USER']->department_id;
+
+$newconnection = new Connection();
+$connection = $newconnection->openConnection();
+
+$stmt = $connection->prepare("SELECT * FROM department WHERE department_id = :department_id");
+$stmt->bindParam(':department_id', $departmentId);
+$stmt->execute();
+
+$department = $stmt->fetch(PDO::FETCH_OBJ);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="../css/viewSubject.css">
+    <link rel="stylesheet" href="../css/viewSubjectt.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <title>Document</title>
 </head>
+
 <body>
-    <div class="sidebar"> 
+    <div class="sidebar">
         <div class="top">
             <div class="logo">
                 <img src="../images/crmclogo.png" alt="">
@@ -55,20 +73,20 @@ $teacherId = $_SESSION['USER']->teacher_id;
             <i class="bx bx-menu" id="sidebarbtn"></i>
         </div>
         <div class="user">
-            <img src="<?= $_SESSION['USER']->teacher_profile?>" alt="">
+            <img src="<?= $_SESSION['USER']->teacher_profile ?>" alt="">
             <div>
-                <p class="name"><?= $_SESSION['USER']->teacher_name?></p>
+                <p class="name"><?= $_SESSION['USER']->teacher_name ?></p>
                 <p class="rank">Teacher</p>
             </div>
         </div>
         <ul>
             <li class="dashboard_btn">
-                <a href="teacherdashboard.php">
+                <a href="../php/teacherdashboard.php">
                     <i class="bx bxs-grid-alt"></i>
                 </a>
             </li>
             <li class="dashboard_btn">
-                <a href="allstudents.php">
+                <a href="../php/studentdashboard.php">
                     <i class="bx bxs-user"></i>
                 </a>
             </li>
@@ -79,151 +97,106 @@ $teacherId = $_SESSION['USER']->teacher_id;
             </li>
         </ul>
     </div>
+
     <div class="main-content">
-        <div class="maincontainer">
-            <?php
-                require_once('../functions/dbconfig.php'); 
+        <section class="tables py-3">
+            <div class="txtbox1" style="color: white;"><?= strtoupper($department->department_name) ?></div>
+            <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
+                <div class="card-body" style="color:white;">
+                    <div class="table-body col-12 text-center">
+                        <table id="example1" class="display " style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Course Profile</th>
+                                    <th class="text-center">Student Name</th>
+                                    <th class="text-center">Course Type</th>
+                                    <th class="text-center">Year Level</th>
+                                    <th class="text-center">Course Name</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody style="vertical-align: middle;">
+                                <?php
+                                require_once('../functions/dbconfig.php');
 
-                $departmentId = $_SESSION['USER']->department_id;
+                                $departmentId = $_SESSION['USER']->department_id;
 
-                $newconnection = new Connection();
-                $connection = $newconnection->openConnection();
+                                $newconnection = new Connection();
+                                $connection = $newconnection->openConnection();
 
-                $stmt = $connection->prepare("SELECT * FROM department WHERE department_id = :department_id");
-                $stmt->bindParam(':department_id', $departmentId);
-                $stmt->execute();
-                
-                $department = $stmt->fetch(PDO::FETCH_OBJ);
-            ?>
-            <div class="container">
-                <div class="profilebox">
-                    <div class="profile">
-                        <img src="<?= $department->department_logo ?>" alt="">
-                    </div>
-                    <div class="namebox">
-                        <div class="txtbox1"><?= strtoupper($department->department_name) ?></div>
-                    </div>
-                </div>
-            </div>
-            <div class="studentboxcontainer">
-                <div class="studentcontainer">
-                    <div class="studenttxt">Student List :</div>
-                    <div class="student-box">
-                        <?php
-                        require_once("userconnection.php");
+                                $sql = "SELECT * FROM students WHERE yearlevel_id = :yearlevel_id AND department_id = :department_id AND course_id = :course_id ORDER BY department_id";
+                                $stmt = $connection->prepare($sql);
+                                $stmt->bindParam(':department_id', $departmentId);
+                                $stmt->bindParam(':yearlevel_id', $subjectLevelId);
+                                $stmt->bindParam(':course_id', $subjectCourseId);
+                                $stmt->execute();
 
-                        $departmentId = $_SESSION['USER']->department_id;
+                                if ($stmt->rowCount() > 0) {
+                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-                        $newconnection = new Connection();
-                        $connection = $newconnection->openConnection();
+                                        $department = $row['department_id'];
 
-                        $sql = "SELECT * FROM students WHERE yearlevel_id = :yearlevel_id AND department_id = :department_id AND course_id = :course_id ORDER BY department_id";
-                        $stmt = $connection->prepare($sql);
-                        $stmt->bindParam(':department_id', $departmentId);
-                        $stmt->bindParam(':yearlevel_id', $subjectLevelId);
-                        $stmt->bindParam(':course_id', $subjectCourseId);
-                        $stmt->execute();
+                                        $stmtdepartment = $connection->prepare("SELECT * FROM department WHERE department_id = $department");
+                                        $stmtdepartment->execute();
+                                        $departments = $stmtdepartment->fetch(PDO::FETCH_OBJ);
 
-                        if ($stmt->rowCount() > 0) {
-                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
+                                        <tr>
+                                            <td><img src="<?= $departments->department_logo ?>" alt="" style="border-radius:50%;hieght:50px;width:50px;"></td>
+                                            <td><?= $row['student_name'] ?></td>
+                                            <td><?= $row['department_name'] ?></td>
+                                            <td><?= $row['year_level'] ?></td>
+                                            <td><?= $row['course_name'] ?></td>
 
-                            $department = $row['department_id'];
-
-                            $stmtdepartment = $connection->prepare("SELECT * FROM department WHERE department_id = $department");
-                            $stmtdepartment->execute();
-                            $departments = $stmtdepartment->fetch(PDO::FETCH_OBJ);
-
-                        ?>
-                                <div class="student-card">
-                                    <div class="studentprofileinfo">
-                                        <div class="student-profile">
-                                            <img src="<?= $departments->department_logo?>" alt="">
-                                        </div>
-                                        <div class="student-info">
-                                            <div class="student-nametype">
-                                                <div class="student-name">
-                                                    <?= $row['student_name'] ?>
-                                                </div>
-                                                <div class="student-type">
-                                                    <?= $row['department_name'] ?>
-                                                </div>
-                                            </div>
-                                          </div>
-                                    </div>
-                                    <div class="courselevel">
-                                        <?= $row['year_level'] ?> - <?= $row['course_name'] ?>
-                                    </div>
-                                    <div class="buttons">
-                                        <button class="view-student-button" id="printButton" onclick="updateStatus(<?= $row['student_id'] ?>, <?= $subjectId ?>)"><img src="../images/print.png" alt=""></button>
-                                        
-                                        <button class="view-student-button" onclick="openCreateModal(<?= $row['student_id'] ?>, <?= $subjectId ?>, <?= $teacherId ?>)"><img src="../images/search.png" alt=""></button>
-                                    </div>
-                                </div>
-                        <?php
-                            }
-                        } else {
-                        ?>
-                            <div class="nostudent">No student available.</div>
-                        <?php
-                        }
-                        $newconnection->closeConnection();
-                        ?>
+                                            <td>
+                                                <i class="fa-solid fa-eye" style="color: blue;" data-bs-toggle="modal" data-bs-target="#create-grade" onclick="openCreateModal(<?= $row['student_id'] ?>, <?= $subjectId ?>, <?= $teacherId ?>)"></i> |
+                                                <i class="fa-solid fa-print" style="color: blue;" id="printButton" onclick="updateStatus(<?= $row['student_id'] ?>, <?= $subjectId ?>)"></i>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <div class="nostudent">No student available.</div>
+                                <?php
+                                }
+                                $newconnection->closeConnection();
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <?php
-        require_once('../functions/dbconfig.php'); 
-
-
-                $newconnection = new Connection();
-                $connection = $newconnection->openConnection();
-
-                $stmt = $connection->prepare("SELECT * FROM department WHERE department_id = :department_id");
-                $stmt->bindParam(':department_id', $departmentId);
-                $stmt->execute();
-                
-                $department = $stmt->fetch(PDO::FETCH_OBJ);
-
-            ?>
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <h2 id="modalTitle"><?=$subject->subject_name?> | <?=$subject->descriptive_title?></h2>
-                    <label id="studentName"></label>
-                    <form method="POST" enctype="multipart/form-data" id="semesterForm" class="createModal">
-                        <div class="namedepartment">
-                            <div class="name">
-                                <label>Prelim :</label>
-                                <input type="text" name="prelimScore" id="prelimScore" placeholder="Enter prelim score (100 maximum)">
-                            </div>
-                            <div class="department">
-                                <label>Midterm :</label>
-                                <input type="text" name="midtermScore" id="midtermScore" placeholder="Enter midterm score (100 maximum)">
-                            </div>
-                        </div>
-                        <div class="namedepartment">
-                            <div class="name">
-                                <label>Semi-Final :</label>
-                                <input type="text" name="semifinalScore" id="semifinalScore" placeholder="Enter semifinal score (100 maximum)">
-                            </div>
-                            <div class="department">
-                                <label>Final :</label>
-                                <input type="text" name="finalScore" id="finalScore" placeholder="Enter final score (100 maximum)">
-                            </div>
-                        </div>
-                        <br><h1>FINAL GRADE :</h1>
-                        <h2 id="finalGrade" name="finalGrade"></h2>
-                        <p id="remarks"></p>
-                        <input type="hidden" name="studentId" id="studentId">
-                        <input type="hidden" name="subjectId" id="subjectId">
-                        <input type="hidden" name="teacherId" id="teacherId">
-                        <input type="hidden" name="semesterName" value="<?= $subject->semester?>">
-                        <button class="submitbtn" name="addGrade" onclick="submitForm()">Done</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        </section>
     </div>
+    
+
+    <?php
+    require_once('../functions/dbconfig.php');
+
+    $newconnection = new Connection();
+    $connection = $newconnection->openConnection();
+
+    $stmt = $connection->prepare("SELECT * FROM department WHERE department_id = :department_id");
+    $stmt->bindParam(':department_id', $departmentId);
+    $stmt->execute();
+
+    $department = $stmt->fetch(PDO::FETCH_OBJ);
+    ?>
+    
+    <?php require_once('../modal/test.php'); ?>
     <script src="../js/viewSubject.js"></script>
+    <script src="https://kit.fontawesome.com/7b92f6b770.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script>
+        new DataTable('#example1', {
+            info: false,
+            ordering: false,
+            paging: false
+        });
+    </script>
+
 </body>
+
 </html>

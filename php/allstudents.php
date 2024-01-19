@@ -95,15 +95,13 @@ usercheck_login();
                     </select>
                 </div>
                 </div>
-                <div class="filter">
-                    <button type="submit" name="filter"  style="position: relative;bottom:95px;left:30%;" class="filter-button">Filter</button>
-                </div>
+                    <button type="submit" name="filter"  style="position: relative;bottom:35px;left:120%;" class="filter-button">Filter</button>
             </form>
             <div class="card border-0" style="background-color: rgba(0, 0, 0, 0);">
                 <div class="card-body" style="color:white;">
-                    <div class="table-body col-12 text-center">
+                <div class="table-body col-12 text-center" style="overflow: auto; max-height: 630px;">
                         <table class="table table-striped" style="width:100%;">
-                            <thead>
+                            <thead style="position:sticky; top:0; background-color:#343a40;color:white;">
                                 <tr>
                                     <th class="text-center">Department Logo</th>
                                     <th class="text-center">Student Name</th>

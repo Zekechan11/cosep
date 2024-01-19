@@ -491,7 +491,7 @@ function addGrade($data)
             $newconnection->closeConnection();
 
             // Redirect with subject_id in the URL
-            header("Location: ../admin/.php?subject_id=$subjectId");
+            header("Location: ../admin/viewSubject.php?subject_id=$subjectId");
             die;
         }
     }
